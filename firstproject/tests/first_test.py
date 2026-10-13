@@ -10,13 +10,7 @@ from firstproject.pages.cartPage import Cart
 from firstproject.pages.dashboardPage import Product
 from firstproject.pages.loginPage import LoginPage
 
-
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
-
-
-
-
+# first test case
 @pytest.mark.secondlogin
 def test_login_second(secondtestfix):
     driver = secondtestfix
