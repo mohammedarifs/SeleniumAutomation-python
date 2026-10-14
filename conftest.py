@@ -34,7 +34,7 @@ def session_finish():
 
 
 @pytest.fixture
-def secondtestfix():
+def Configure(scope= "module"):
     chrome_options = Options()
     chrome_options.add_argument("--incognito")
     driver = webdriver.Chrome(options=chrome_options)

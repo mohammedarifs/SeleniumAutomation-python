@@ -5,24 +5,29 @@ from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-# from firstproject.pages import dashboardPage
-from firstproject.pages.cartPage import Cart
-from firstproject.pages.dashboardPage import Product
-from firstproject.pages.loginPage import LoginPage
+# from DemoProject.pages import dashboardPage
+from DemoProject.pages.cartPage import Cart
+from DemoProject.pages.dashboardPage import Product
+from DemoProject.pages.loginPage import LoginPage
+from utils.configReader import read_test_data
+
+test_data = read_test_data("testdata.csv")
 
 # first test case
-@pytest.mark.secondlogin
-def test_login_second(secondtestfix):
-    driver = secondtestfix
+@pytest.mark.VerifyLogin
+@pytest.mark.parametrize("row", test_data)
+def test_login(Configure,row):
+    driver = Configure
     login_page = LoginPage(driver)
-    login_page.enter_username("standard_user")#execute second
-    login_page.enter_password("secret_sauce")
+    print(row['username'],row['password'])
+    login_page.enter_username(row['username'])#execute second
+    login_page.enter_password(row['password'])
     login_page.click_login()
     login_page.logout()
 
-@pytest.mark.secondaddtocart
-def test_add_to_cart(secondtestfix):
-    driver = secondtestfix
+@pytest.mark.AddToCart
+def test_add_to_cart(Configure):
+    driver = Configure
     login_page = LoginPage(driver)
     login_page.enter_username("standard_user")#execute second
     login_page.enter_password("secret_sauce")
@@ -35,9 +40,9 @@ def test_add_to_cart(secondtestfix):
     login_page.logout()
 
 
-@pytest.mark.secondCheckout
-def test_checkout(secondtestfix):
-    driver = secondtestfix
+@pytest.mark.Checkout
+def test_checkout(Configure):
+    driver = Configure
     login_page = LoginPage(driver)
     login_page.enter_username("standard_user")#execute second
     login_page.enter_password("secret_sauce")
