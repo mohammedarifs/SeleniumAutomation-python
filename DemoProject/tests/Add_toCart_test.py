@@ -54,3 +54,21 @@ def test_checkout(Configure):
     cart_tittle = cartPage.get_cart_title()
     assert cart_tittle =="Checkout: Your Information", "unable to read checkout page"
     login_page.logout()
+
+
+
+@pytest.mark.PlaceOrder
+def test_checkout(Configure):
+    driver = Configure
+    login_page = LoginPage(driver)
+    login_page.enter_username("standard_user")#execute second
+    login_page.enter_password("secret_sauce")
+    login_page.click_login()
+    dashboardPage=Product(driver)
+    dashboardPage.goto_cart()
+    cartPage = Cart(driver)
+    cartPage.click_to_checkout()
+    # orderpage.placeOrder()
+    cart_tittle = cartPage.get_cart_title()
+    assert cart_tittle =="Checkout: Your Information", "unable to read checkout page"
+    login_page.logout()
