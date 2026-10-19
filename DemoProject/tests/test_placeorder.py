@@ -23,6 +23,7 @@ def test_login(Configure,row):
     login_page.enter_username(row['username'])#execute second
     login_page.enter_password(row['password'])
     login_page.click_login()
+    assert driver.title == "Swag Labs", "Login failed"
     login_page.logout()
 
 @pytest.mark.AddToCart
@@ -58,7 +59,7 @@ def test_checkout(Configure):
 
 
 @pytest.mark.PlaceOrder
-def test_checkout(Configure):
+def test_place_order(Configure):
     driver = Configure
     login_page = LoginPage(driver)
     login_page.enter_username("standard_user")#execute second
